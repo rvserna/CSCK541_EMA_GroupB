@@ -1,8 +1,22 @@
 import socket
 import json
+import time
+
+text_file = "data.txt"
+py_file = "dict.py"
 
 def send_message(client_socket, message):
     client_socket.send(json.dumps(message).encode('utf-8'))
+
+def send_file(client_socket, file_path):
+    try:
+        with open(file_path, 'rb') as file:
+            send_message(client_socket, {"file": True, "file_name": file_path.split(' ')[-1]})
+            time.sleep(1)
+            file_data = file.read()
+            client_socket.send(file_data)
+    except FileNotFoundError:
+        print("File not found")
 
 def run_client():
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
