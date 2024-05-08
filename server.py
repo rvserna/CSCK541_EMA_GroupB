@@ -11,6 +11,13 @@ def receive_message(client_socket):
     print("recieve message data", data)
     return json.loads(data)
 
+
+def receive_file(client_socket, file_name):
+    with open(f"received_file_{file_name}", 'wb') as file:
+        file_data = client_socket.recv(CHUNK_SIZE)
+        file.write(file_data)
+
+
 def run_server():
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     host = '127.0.0.1'
