@@ -17,6 +17,24 @@ def receive_file(client_socket, file_name):
         file_data = client_socket.recv(CHUNK_SIZE)
         file.write(file_data)
 
+def handle_client(client_socket,server_socket):
+    while True:
+        message = receive_message(client_socket)
+        if 'message' in message:
+       
+            if message['message'].lower() == 'exit':
+                client_socket.send("exit".encode("utf-8"))
+                break
+    
+        if 'file' in message and message['file']:
+                file_name = message['file_name']
+                receive_file(client_socket, file_name)
+     
+    client_socket.close()
+    print("Connection to client closed")
+    # close server socket
+    server_socket.close()
+    
 
 def run_server():
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
