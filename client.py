@@ -32,6 +32,17 @@ def run_client():
         message = {'message': message}
         send_message(client_socket, message)
 
+        # receive message from the server
+        response = client_socket.recv(1024)
+        response = response.decode("utf-8")
+
+        # if server sent us "exit" in the payload, we break out of the loop and close our socket
+        if response.lower() == "exit":
+            break
+    
+    client_socket.close()
+    print("Connection to server closed")
+
 
 
 if __name__ == "__main__":
