@@ -17,6 +17,7 @@ def receive_file(client_socket, file_name):
         file_data = client_socket.recv(CHUNK_SIZE)
         file.write(file_data)
 
+
 def handle_client(client_socket,server_socket):
     while True:
         message = receive_message(client_socket)
@@ -34,7 +35,7 @@ def handle_client(client_socket,server_socket):
     print("Connection to client closed")
     # close server socket
     server_socket.close()
-    
+
 
 def run_server():
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -49,7 +50,12 @@ def run_server():
         try:
             client_socket, client_address = server_socket.accept()
             print(f"Accepted connection from {client_address[0]}:{client_address[1]}")
-        
+
+            client_id = "client_1"
+            if client_id:
+                client_thread = threading.Thread(target=handle_client, args=(client_socket,server_socket))
+                client_thread.start()
+       
         except Exception as e:
             break
 
