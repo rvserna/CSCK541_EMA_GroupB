@@ -26,6 +26,12 @@ def run_client():
 
     print(f"Client connected to server socket")
 
+    print(f"Sending {text_file} file to server.")
+    send_file(client_socket, text_file)
+    
+    print(f"Sending {py_file} file to server.")
+    send_file(client_socket, py_file)
+
     while True:
         message = input("Enter your message or type 'exit' to disconnect: ")
 
