@@ -11,5 +11,14 @@ def run_server():
 
     print(f"Listening on {host}:{port}")
 
+    while True:
+        try:
+            client_socket, client_address = server_socket.accept()
+            print(f"Accepted connection from {client_address[0]}:{client_address[1]}")
+        
+        except Exception as e:
+            break
+
+
 if __name__ == "__main__":
     run_server()
