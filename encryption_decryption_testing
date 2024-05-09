@@ -1,0 +1,20 @@
+"""Unit testing for encryption/decryption"""
+import unittest
+from cryptography.fernet import Fernet
+
+class TestEncryptionAndDecryption(unittest.TestCase):
+    def setUp(self):
+        # use  key from filekey.key
+        with open('filekey.key', 'rb') as filekey:
+            self.key = filekey.read()
+        self.fernet = Fernet(self.key)
+
+    def test_encrypt_decrypt(self):
+        """Testing fernet encryption and decryption functions"""
+        initial = b"hello hello test."
+        encrypted = self.fernet.encrypt(initial)
+        decrypted = self.fernet.decrypt(encrypted)
+        self.assertEqual(initial, decrypted, "fail!)")
+
+if __name__ == "__main__":
+    unittest.main()
