@@ -1,3 +1,4 @@
+"""dictionary serialization"""
 import pickle
 
 dict = {
@@ -6,11 +7,8 @@ dict = {
   "year": 1964,
   "colour": "Purple"
 }
-
+# Open the pickle file in
+# binary writing mode
 with open("dict_serialized.pkl", "wb") as handle:
-  pickle.dump(dict, handle, protocol=pickle.HIGHEST_PROTOCOL)
-
-with open("dict_serialized.pkl", "rb") as handle:
-  dict_unserialized = pickle.load(handle)
-
-print(dict == dict_unserialized)
+    # Serialize the dictionary
+    pickle.dump(dict, handle, protocol=pickle.HIGHEST_PROTOCOL)
