@@ -1,3 +1,4 @@
+"""dictionary serialization"""
 import pickle
 
 dict = {
