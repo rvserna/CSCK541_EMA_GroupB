@@ -4,9 +4,16 @@ Server script for receiving files and messages from clients.
 import socket
 import json
 import threading
+import argparse
 from cryptography.fernet import Fernet
 
 CHUNK_SIZE = 1024
+
+# add argparse for commend-line options 
+parser = argparse.ArgumentParser(description = 'Configure print setting.')
+parser.add_argument('--print-to-screen', action = 'store_true', help = 'Print received items to the screen')
+parser.add_argument('--print-to-file', action='store_true', help='Print received items to a file')
+args = parser.parse_args()
 
 def receive_message(client_socket):
     """
@@ -19,8 +26,17 @@ def receive_message(client_socket):
     data = client_socket.recv(CHUNK_SIZE).decode('utf-8')
     if not data:
         return {}
-    print("recieve message data", data)
-    return json.loads(data)
+    #print("recieve message data", data)
+    #return json.loads(data)
+
+    # modify to suit the logic of print received items
+    message = json.loads(data)
+    if args.print_to_screen:
+        print("Received message:", message)
+    if args.print_to_file:
+        with open('groupb.txt', 'a') as f:
+            f.write("Received message: " + str(message) + "\n")
+    return message
 
 
 def receive_file(client_socket, file_name, f):
@@ -38,7 +54,14 @@ def receive_file(client_socket, file_name, f):
         decrypted_data = f.decrypt(file_data)
         file.write(decrypted_data)
         # Proof of decryption during testing
-        print(f"Received and decrypted file: {file_name}")
+        # print(f"Received and decrypted file: {file_name}")
+
+        # modify to suit the logic of print received items
+        if args.print_to_screen:
+            print(f"Received and decrypted file: {file_name}")
+        if args.print_to_file:
+            with open('groupb.txt', 'a') as f:
+                f.write(f"Received and decrypted file: {file_name}\n")
 
 
 def handle_client(client_socket,server_socket, f):
