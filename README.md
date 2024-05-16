@@ -6,11 +6,15 @@ This repository includes a simple client/server network in which the client will
 
 # Instructions
 ```
-Run the server file first:
-python3 server.py
+Run the server file with print commend first:
+To run the commend to print on screen, please run python server.py --print-to-screen
+To run the commend to print to file, please run python server.py --print-to-file
 
 Then run the client file:
 python3 client.py
+
+Please check the version of python which you are using. 
+It may affect the commend using whether python or python3.
 ```
 
 # Requirements
