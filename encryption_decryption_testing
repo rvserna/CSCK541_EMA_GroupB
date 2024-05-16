@@ -3,6 +3,13 @@ import unittest
 from cryptography.fernet import Fernet
 
 class TestEncryptionAndDecryption(unittest.TestCase):
+    """Verify decryption and Encryption
+    Methods:
+        setUp(self): Makes the Fernet object with encryption key read from 'filekey.key'.
+        test_encrypt_decrypt(self): Encrypts string, decrypts the ciphertext, checks
+                                    that the decrypted text matches the initial string.
+    
+    """
     def setUp(self):
         # use  key from filekey.key
         with open('filekey.key', 'rb') as filekey:
