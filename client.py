@@ -7,7 +7,7 @@ import time
 from cryptography.fernet import Fernet
 
 TEXT_FILE = "data.txt"
-PY_FILE = "dict.py"
+PY_FILE = "dict_serialized.pkl"
 
 # Define key file path
 KEY_FILE = 'filekey.key'

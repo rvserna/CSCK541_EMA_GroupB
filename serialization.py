@@ -1,6 +1,7 @@
+"""dictionary serialization"""
 import pickle
 
-dict = {
+this_dict = {
   "brand": "Ford",
   "model": "Mustang",
   "year": 1964,
@@ -10,4 +11,4 @@ dict = {
 # binary writing mode
 with open("dict_serialized.pkl", "wb") as handle:
     # Serialize the dictionary
-    pickle.dump(dict, handle, protocol=pickle.HIGHEST_PROTOCOL)
+    pickle.dump(this_dict, handle, protocol=pickle.HIGHEST_PROTOCOL)
