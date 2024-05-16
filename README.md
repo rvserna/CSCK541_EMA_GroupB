@@ -7,14 +7,25 @@ This repository includes a simple client/server network in which the client will
 # Instructions
 ```
 Run the generate_key.py to obtain the key to access the server
+
 Run the server.py to open the port
+
 If you would like to print the receive items: 
 (1) To print on screen, please run python server.py --print-to-screen,
     then run the client.py
     you will see the received items on the server terminal.
+
 (2) To print to file, please run python server.py --print-to-file,
     then run the client.py
     you will see a new file groupb.txt is generated at the same directory.
+
+# Tests
+
+(1) Unit test for print to screen and file command
+    please run python test_print_command.py
+    the below files will be generated if the test runs successfully
+    groupb.txt
+    received_file_groupb.txt
 
 Please check the version of python which your computer is using. 
 It may affect the commend using whether python or python3.
