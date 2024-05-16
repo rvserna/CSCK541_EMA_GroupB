@@ -29,7 +29,7 @@ def receive_message(client_socket, args):
     data = client_socket.recv(CHUNK_SIZE).decode('utf-8')
     if not data:
         return {}
-    print("recieve message data", data)
+    #print("recieve message data", data)
     #return json.loads(data)
     # modify to suit the logic of print received items
     message = json.loads(data)
