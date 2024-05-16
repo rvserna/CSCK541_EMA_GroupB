@@ -78,6 +78,8 @@ def handle_client(client_socket,server_socket, f):
             if message['message'].lower() == 'exit':
                 client_socket.send("exit".encode("utf-8"))
                 break
+             # echo back the received message
+            client_socket.send(message['message'].encode("utf-8"))
         if 'file' in message and message['file']:
             file_name = message['file_name']
             receive_file(client_socket, file_name, f)

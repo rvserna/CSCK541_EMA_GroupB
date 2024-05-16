@@ -81,6 +81,8 @@ def run_client():
         # if server sent us "exit" in the payload, we break out of the loop and close our socket
         if response.lower() == "exit":
             break
+        # echo back the received message
+        print("Server:", response)
     client_socket.close()
     print("Connection to server closed")
 
