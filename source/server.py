@@ -26,9 +26,8 @@ def receive_message(client_socket):
     data = client_socket.recv(CHUNK_SIZE).decode('utf-8')
     if not data:
         return {}
-    #print("recieve message data", data)
+    print("recieve message data", data)
     #return json.loads(data)
-
     # modify to suit the logic of print received items
     message = json.loads(data)
     if args.print_to_screen:
@@ -78,8 +77,6 @@ def handle_client(client_socket,server_socket, f):
             if message['message'].lower() == 'exit':
                 client_socket.send("exit".encode("utf-8"))
                 break
-             # echo back the received message
-            client_socket.send(message['message'].encode("utf-8"))
         if 'file' in message and message['file']:
             file_name = message['file_name']
             receive_file(client_socket, file_name, f)
