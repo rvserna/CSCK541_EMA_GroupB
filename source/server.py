@@ -9,13 +9,16 @@ from cryptography.fernet import Fernet
 
 CHUNK_SIZE = 1024
 
-# add argparse for commend-line options 
-parser = argparse.ArgumentParser(description = 'Configure print setting.')
-parser.add_argument('--print-to-screen', action = 'store_true', help = 'Print received items to the screen')
-parser.add_argument('--print-to-file', action='store_true', help='Print received items to a file')
+# add argparse for commend-line options
+parser = argparse.ArgumentParser(description='Configure print setting.')
+parser.add_argument('--print-to-screen', action='store_true',
+                    help='Print received items to the screen')
+parser.add_argument('--print-to-file', action='store_true',
+                    help='Print received items to a file')
 args = parser.parse_args()
 
-def receive_message(client_socket):
+
+def receive_message(client_socket, args):
     """
     Receive message from the client.
     Arguments:
@@ -26,8 +29,8 @@ def receive_message(client_socket):
     data = client_socket.recv(CHUNK_SIZE).decode('utf-8')
     if not data:
         return {}
-    #print("recieve message data", data)
-    #return json.loads(data)
+    # print("recieve message data", data)
+    # return json.loads(data)
 
     # modify to suit the logic of print received items
     message = json.loads(data)
@@ -39,7 +42,7 @@ def receive_message(client_socket):
     return message
 
 
-def receive_file(client_socket, file_name, f):
+def receive_file(client_socket, file_name, f, args):
     """
     Receive a file from the client.
     Arguments:
@@ -62,9 +65,10 @@ def receive_file(client_socket, file_name, f):
         if args.print_to_file:
             with open('groupb.txt', 'a') as f:
                 f.write(f"Received and decrypted file: {file_name}\n")
+        return f"Received and decrypted file: {file_name}"
 
 
-def handle_client(client_socket,server_socket, f):
+def handle_client(client_socket, server_socket, f, args):
     """
     Handle comms with a client.
     Argumentss:
@@ -73,7 +77,7 @@ def handle_client(client_socket,server_socket, f):
         f (cryptography.fernet.Fernet): Fernet encryption object.
     """
     while True:
-        message = receive_message(client_socket)
+        message = receive_message(client_socket, args)
         if 'message' in message:
             if message['message'].lower() == 'exit':
                 client_socket.send("exit".encode("utf-8"))
@@ -82,7 +86,7 @@ def handle_client(client_socket,server_socket, f):
             client_socket.send(message['message'].encode("utf-8"))
         if 'file' in message and message['file']:
             file_name = message['file_name']
-            receive_file(client_socket, file_name, f)
+            receive_file(client_socket, file_name, f, args)
     client_socket.close()
     print("Connection to client closed")
     # close server socket
@@ -114,12 +118,13 @@ def run_server():
     while True:
         try:
             client_socket, client_address = server_socket.accept()
-            print(f"Accepted connection from {client_address[0]}:{client_address[1]}")
+            print(
+                f"Accepted connection from {client_address[0]}:{client_address[1]}")
 
             client_id = "client_1"
             if client_id:
                 client_thread = threading.Thread(target=handle_client, args=(
-                    client_socket,server_socket, f))
+                    client_socket, server_socket, f, args))
                 client_thread.start()
         except Exception as e:
             break
