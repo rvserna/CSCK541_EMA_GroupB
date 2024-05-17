@@ -6,13 +6,14 @@
     │   ├── LICENSE
     │   └── requirements.txt
     ├── source/
-    │   ├── __pycache__
     │   ├── client.py
     │   ├── filekey.key
     │   ├── generate_key.py
     │   └── server.py
     ├── tests/
     │   ├── encryption_decryption_testing.py
+    │   ├── groupb.txt
+    │   ├── received_file_groupb.txt
     │   ├── test_deserialization.py
     │   ├── test_print_command.py
     │   └── unit_test_connection.py
@@ -20,9 +21,6 @@
     ├── data.txt
     ├── dict_serialized.pkl
     ├── directory_tree.txt
-    ├── filekey.key
-    ├── groupb.txt
     ├── received_file_data.txt
     ├── received_file_dict_serialized.pkl
-    ├── received_file_groupb.txt
     └── serialization.py
