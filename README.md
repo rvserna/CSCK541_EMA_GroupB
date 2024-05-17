@@ -6,6 +6,8 @@ This repository includes a simple client/server network in which the client will
 
 # Instructions
 ```
+Install cryptography
+
 Run the generate_key.py to obtain the key to access the server
 
 Run the server.py to open the port
@@ -33,7 +35,7 @@ It may affect the commend using whether python or python3.
 
 # Requirements
 
-The requirments can be found in [requirements.txt](https://github.com/rvserna/CSCK541_EMA_GroupB/blob/main/requirements.txt).
+The requirments can be found in [requirements.txt](https://github.com/rvserna/CSCK541_EMA_GroupB/blob/main/docs/requirements.txt).
 
 # License
 
