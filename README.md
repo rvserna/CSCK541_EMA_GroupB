@@ -21,6 +21,8 @@ If you would like to print the receive items:
     then run the client.py
     you will see a new file groupb.txt is generated at the same directory.
 
+Run the client.py for client's response to server.
+
 # Tests
 
 (1) Unit test for print to screen and file command
