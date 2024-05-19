@@ -1,4 +1,0 @@
-This is a message from data.txt file
-Another line 
-Third line
-Fourth Line
