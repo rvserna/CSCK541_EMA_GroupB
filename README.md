@@ -6,6 +6,9 @@ This repository includes a simple client/server network in which the client will
 
 # Instructions
 ```
+Please check the version of python which your computer is using. 
+It may affect the commend using whether python or python3.
+
 Install cryptography
 
 Run the generate_key.py to obtain the key to access the server
@@ -31,8 +34,6 @@ Run the client.py for client's response to server.
     groupb.txt
     received_file_groupb.txt
 
-Please check the version of python which your computer is using. 
-It may affect the commend using whether python or python3.
 ```
 
 # Requirements
